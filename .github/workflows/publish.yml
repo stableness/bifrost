@@ -41,16 +41,16 @@ jobs:
 
 
 
-      - name: Docker - Node.js - GPR
-        run: |
+      #- name: Docker - Node.js - GPR
+      #  run: |
 
-          VER=$(jq -r '.version' package.json)
-          URI=docker.pkg.github.com/${GITHUB_REPOSITORY}/node:${VER}
+      #    VER=$(jq -r '.version' package.json)
+      #    URI=docker.pkg.github.com/${GITHUB_REPOSITORY}/node:${VER}
 
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com -u ${GITHUB_ACTOR} --password-stdin
+      #    echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com -u ${GITHUB_ACTOR} --password-stdin
 
-          docker build -t ${URI} -f node.Dockerfile .
-          docker push ${URI}
+      #    docker build -t ${URI} -f node.Dockerfile .
+      #    docker push ${URI}
 
 
 
@@ -70,13 +70,13 @@ jobs:
 
 
 
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
-          registry-url: https://npm.pkg.github.com
+      #- uses: actions/setup-node@v1
+      #  with:
+      #    node-version: 12.x
+      #    registry-url: https://npm.pkg.github.com
 
-      - name: NPM - GPR
-        run: npm publish --tag next --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #- name: NPM - GPR
+      #  run: npm publish --tag next --access public
+      #  env:
+      #    NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
