@@ -1,0 +1,32 @@
+ARG NV=12
+FROM mhart/alpine-node:slim-${NV}
+
+
+
+
+
+RUN apk add --no-cache tini
+
+
+
+
+
+WORKDIR /opt/app
+ENV NODE_ENV production
+
+
+
+
+
+COPY .npmrc ./
+COPY package.json ./
+COPY index.js ./
+
+
+
+
+
+EXPOSE 80
+CMD [ "node", "index.js" ]
+ENTRYPOINT [ "/sbin/tini", "-v", "--" ]
+
