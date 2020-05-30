@@ -44,12 +44,12 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
-          registry-url: https://npm.pkg.github.com
+          registry-url: https://registry.npmjs.org
 
-      - name: NPM - GPR
+      - name: NPM - npmjs
         run: npm publish --tag next --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
 
 
@@ -58,10 +58,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
-          registry-url: https://registry.npmjs.org
+          registry-url: https://npm.pkg.github.com
 
-      - name: NPM - npmjs
+      - name: NPM - GPR
         run: npm publish --tag next --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
