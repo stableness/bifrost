@@ -27,6 +27,22 @@ jobs:
 
 
 
+      - name: Docker - Node.js - DockerHub
+        run: |
+
+          VER=$(jq -r '.version' package.json)
+          BASE=imcotton/bifrost-node
+
+          echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u imcotton --password-stdin
+
+          docker pull ${BASE}:${VER}
+          docker tag ${BASE}:${VER} ${BASE}:latest
+          docker push ${BASE}:latest
+
+
+
+
+
       - name: Docker - Node.js - GPR
         run: |
 
