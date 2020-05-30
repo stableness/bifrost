@@ -1,9 +1,9 @@
 // @ts-check
 
-const { connect } = require('net');
-const { createServer } = require('http');
-const { readFileSync } = require('fs');
-const { pipeline } = require('stream');
+import { connect } from 'net';
+import { createServer } from 'http';
+import { readFileSync } from 'fs';
+import { pipeline } from 'stream';
 
 
 
@@ -17,38 +17,41 @@ const {
 
 
 
+export function run () {
 
-createServer()
+    return createServer()
 
-    .listen({ port: +port, host: '0.0.0.0' }, function () {
-        console.log('http', this.address().port);
-    })
+        .listen({ port: +port, host: '0.0.0.0' }, function () {
+            console.log('http', this.address().port);
+        })
 
-    .addListener('request', (_request, response) => {
-        response.writeHead(204).end();
-    })
+        .addListener('request', (_request, response) => {
+            response.writeHead(204).end();
+        })
 
-    .addListener('connect', ({ url, headers }, socket) => {
+        .addListener('connect', ({ url, headers }, socket) => {
 
-        if (authBy(headers) === false) {
-            return socket.once('error', noop).end(reply);
-        }
+            if (authBy(headers) === false) {
+                return socket.once('error', noop).end(reply);
+            }
 
-        const newURL = new URL(`http://${ url }`);
+            const newURL = new URL(`http://${ url }`);
 
-        const { hostname: host } = newURL;
-        const port = portNormalize(newURL);
+            const { hostname: host } = newURL;
+            const port = portNormalize(newURL);
 
-        const conn = connect({ port, host, allowHalfOpen: true }, () => {
-            socket.write('HTTP/1.0 200\r\n\r\n');
-        });
+            const conn = connect({ port, host, allowHalfOpen: true }, () => {
+                socket.write('HTTP/1.0 200\r\n\r\n');
+            });
 
-        pipeline(socket, conn, socket, _err => {
-        });
+            pipeline(socket, conn, socket, _err => {
+            });
 
-    })
+        })
 
-;
+    ;
+
+}
 
 
 

@@ -21,12 +21,13 @@ ENV NODE_ENV production
 COPY .npmrc ./
 COPY package.json ./
 COPY index.js ./
+COPY bin.js ./
 
 
 
 
 
 EXPOSE 80
-CMD [ "node", "index.js" ]
+CMD [ "node", "bin.js" ]
 ENTRYPOINT [ "/sbin/tini", "-v", "--" ]
 

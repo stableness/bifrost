@@ -2,14 +2,17 @@
   "name": "@stableness/bifrost",
   "version": "1.0.1",
   "description": "TBD",
-  "main": "index.js",
-  "bin": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production node index.js"
+    "start": "NODE_ENV=production node bin.js"
   },
+  "type": "module",
   "files": [
+    "bin.js",
     "index.js"
   ],
+  "bin": {
+    "bifrost": "bin.js"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/stableness/bifrost.git"
