@@ -1,9 +1,9 @@
 // @ts-check
 
-import { connect } from 'net';
-import { createServer } from 'http';
-import { readFileSync } from 'fs';
-import { pipeline } from 'stream';
+const { connect } = require('net');
+const { createServer } = require('http');
+const { readFileSync } = require('fs');
+const { pipeline } = require('stream');
 
 
 
