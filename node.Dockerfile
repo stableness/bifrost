@@ -19,9 +19,9 @@ ENV NODE_ENV production
 
 
 COPY .npmrc ./
+COPY bin.js ./
 COPY package.json ./
 COPY index.js ./
-COPY bin.js ./
 
 
 
