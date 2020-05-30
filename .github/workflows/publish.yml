@@ -34,7 +34,7 @@ jobs:
 
           echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com -u ${GITHUB_ACTOR} --password-stdin
 
-          docker build -t ${URI} -f Dockerfile-node .
+          docker build -t ${URI} -f node.Dockerfile .
           docker push ${URI}
 
 
