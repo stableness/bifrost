@@ -1,6 +1,6 @@
 {
   "name": "@stableness/bifrost",
-  "version": "1.0.0-1",
+  "version": "1.0.0-2",
   "description": "TBD",
   "main": "index.js",
   "bin": "index.js",
