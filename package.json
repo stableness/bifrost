@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/stableness/bifrost#readme",
   "devDependencies": {
-    "@types/node": "^12.12.42"
+    "@types/node": "^14.0.6"
   }
 }
