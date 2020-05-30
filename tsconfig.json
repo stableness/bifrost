@@ -1,0 +1,33 @@
+{
+  "include": [
+    "./*.js",
+  ],
+  "compilerOptions": {
+    "incremental": true,
+    "target": "es2019",
+    "module": "es2020",
+    "lib": [
+      "es2019",
+    ],
+    "declaration": false,
+    "removeComments": true,
+    "importHelpers": true,
+
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "esModuleInterop": true,
+
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+
+    "assumeChangesOnlyAffectDirectDependencies": true,
+
+    "forceConsistentCasingInFileNames": true,
+  }
+}
