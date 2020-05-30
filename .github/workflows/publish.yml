@@ -1,0 +1,67 @@
+name: Publishing
+
+
+
+
+on:
+  push:
+    tags:
+      - v/*
+
+
+
+
+
+jobs:
+
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v2
+
+
+
+
+
+      - name: Docker - Node.js - GPR
+        run: |
+
+          VER=$(jq -r '.version' package.json)
+          URI=docker.pkg.github.com/${GITHUB_REPOSITORY}/node:${VER}
+
+          echo ${{ secrets.GITHUB_TOKEN }} | docker login https://docker.pkg.github.com -u ${GITHUB_ACTOR} --password-stdin
+
+          docker build -t ${URI} -f Dockerfile-node .
+          docker push ${URI}
+
+
+
+
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+          registry-url: https://npm.pkg.github.com
+
+      - name: NPM - GPR
+        run: npm publish --tag next --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+
+
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+          registry-url: https://registry.npmjs.org
+
+      - name: NPM - npmjs
+        run: npm publish --tag next --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
