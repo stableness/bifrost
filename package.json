@@ -1,0 +1,23 @@
+{
+  "name": "@stableness/bifrost",
+  "version": "1.0.0",
+  "description": "TBD",
+  "main": "index.js",
+  "bin": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "NODE_ENV=production node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stableness/bifrost.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stableness/bifrost/issues"
+  },
+  "homepage": "https://github.com/stableness/bifrost#readme",
+  "devDependencies": {
+    "@types/node": "^12.12.42"
+  }
+}
