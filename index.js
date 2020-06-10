@@ -58,8 +58,7 @@ function onConnect ({ url, headers }, socket) {
         socket.write('HTTP/1.0 200\r\n\r\n');
     });
 
-    pipeline(socket, conn, socket, _err => {
-    });
+    pipeline(socket, conn, socket, noop);
 
 }
 
