@@ -25,31 +25,41 @@ export function run () {
             console.log('http', this.address().port);
         })
 
+        .addListener('connect', onConnect)
+
         .addListener('request', (_request, response) => {
             response.writeHead(204).end();
         })
 
-        .addListener('connect', ({ url, headers }, socket) => {
-
-            if (authBy(headers) === false) {
-                return socket.once('error', noop).end(reply);
-            }
-
-            const newURL = new URL(`http://${ url }`);
-
-            const { hostname: host } = newURL;
-            const port = portNormalize(newURL);
-
-            const conn = connect({ port, host, allowHalfOpen: true }, () => {
-                socket.write('HTTP/1.0 200\r\n\r\n');
-            });
-
-            pipeline(socket, conn, socket, _err => {
-            });
-
-        })
-
     ;
+
+}
+
+/**
+ * @param { import('http').IncomingMessage } request
+ * @param { import('net').Socket } socket
+ */
+function onConnect ({ url, headers }, socket) {
+
+    if (authBy(headers) === false) {
+        return socket.once('error', noop).end(reply);
+    }
+
+    const newURL = readURL(url);
+
+    if (newURL == null) {
+        return socket.once('error', noop).end();
+    }
+
+    const { hostname: host } = newURL;
+    const port = portNormalize(newURL);
+
+    const conn = connect({ port, host, allowHalfOpen: true }, () => {
+        socket.write('HTTP/1.0 200\r\n\r\n');
+    });
+
+    pipeline(socket, conn, socket, _err => {
+    });
 
 }
 
@@ -114,6 +124,23 @@ function readAuth (file) {
         return JSON.parse(readFileSync(file, { encoding: 'utf8' }));
     } catch {
         return {};
+    }
+
+}
+
+
+
+
+
+/**
+ * @param { string } path
+ */
+function readURL (path) {
+
+    try {
+        return new URL(`http://${ path }`);
+    } catch {
+        return undefined;
     }
 
 }
