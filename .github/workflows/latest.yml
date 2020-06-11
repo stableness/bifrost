@@ -31,7 +31,7 @@ jobs:
         run: |
 
           VER=$(jq -r '.version' package.json)
-          BASE=imcotton/bifrost-node
+          BASE=stableness/bifrost-node
 
           echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u imcotton --password-stdin
 
