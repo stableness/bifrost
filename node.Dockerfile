@@ -19,9 +19,10 @@ ENV NODE_ENV production
 
 
 COPY .npmrc ./
+COPY README.md ./
 COPY bin.js ./
-COPY package.json ./
 COPY index.js ./
+COPY package.json ./
 
 
 
